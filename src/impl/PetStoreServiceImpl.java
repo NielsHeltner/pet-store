@@ -20,7 +20,7 @@ public class PetStoreServiceImpl extends AbstractPetStoreService {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new PetStoreServiceImpl().catService.postCat(32));
+		new PetStoreServiceImpl().run();
 	}
 
 }
