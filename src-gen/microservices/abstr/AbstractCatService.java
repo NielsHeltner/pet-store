@@ -59,6 +59,19 @@ public abstract class AbstractCatService implements CatService, Runnable {
 							util.sendResponse(exchange, 405, method + " is not implemented on " + path);
 					}
 				}
+				if (path.matches("\\/cat\\/[0-9]+(\\.[0-9]+)")) {
+					System.out.println("/cat/{double} was hit");
+					switch (method) {
+						case "GET": {
+							double legs = Double.valueOf(path.split("/")[2]);
+							Object response = getCat(legs);
+							util.sendResponse(exchange, 200, response);
+							return;
+						}
+						default:
+							util.sendResponse(exchange, 405, method + " is not implemented on " + path);
+					}
+				}
 				else {
 					util.sendResponse(exchange, 404, path + " could not be found");
 				}

@@ -11,15 +11,16 @@ microservice PET_STORE_SERVICE @ 192.168.0.1:5000
 			return int
 
 microservice DOG_SERVICE @ 192.168.0.2:5001
-	implements ANIMAL_TEMPLATE("dog", "dogYears")
+	implements ANIMAL_TEMPLATE(dog, PUT, dogYears)
 
 microservice CAT_SERVICE @ 192.168.0.3:5002
-	implements ANIMAL_TEMPLATE("cat", "catYears")
+	implements ANIMAL_TEMPLATE(cat, POST, catYears)
 
-template ANIMAL_TEMPLATE(type, age)
-	implements GENERIC({type}, "GET", "string")
-	/{type}
-		POST
+template ANIMAL_TEMPLATE(animal, method, age)
+	implements GENERIC({animal}, GET, string)
+	implements PATH_VARIABLE({animal}, double, legs)
+	/{animal}
+		{method}
 			int {age}
 			return int
 
@@ -27,3 +28,8 @@ template GENERIC(path, method, returnType)
 	/{path}
 		{method}
 			return {returnType}
+
+template PATH_VARIABLE(path, type, name)
+	/{path}/{{type} {name}}
+		GET
+			return int

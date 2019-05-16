@@ -8,7 +8,7 @@ import microservices.abstr.AbstractDogService;
 public class DogServiceImpl extends AbstractDogService {
 	
 	@Override
-	public int postDog(int dogYears) {
+	public int putDog(int dogYears) {
 		//TODO: implement endpoint logic here
 		return 0;
 	}
@@ -17,6 +17,12 @@ public class DogServiceImpl extends AbstractDogService {
 	public String getDog() {
 		//TODO: implement endpoint logic here
 		return null;
+	}
+	
+	@Override
+	public int getDog(double legs) {
+		//TODO: implement endpoint logic here
+		return 0;
 	}
 	
 	public static void main(String[] args) {

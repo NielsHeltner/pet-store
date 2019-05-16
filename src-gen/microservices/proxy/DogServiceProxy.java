@@ -12,9 +12,9 @@ public class DogServiceProxy implements DogService {
 	private HttpUtil util = new HttpUtil();
 	
 	@Override
-	public int postDog(int dogYears) {
+	public int putDog(int dogYears) {
 		try {
-			String response = util.sendRequest("http://" + HOST + ":" + PORT + "/dog", "POST", "dogYears=" + dogYears + "");
+			String response = util.sendRequest("http://" + HOST + ":" + PORT + "/dog", "PUT", "dogYears=" + dogYears + "");
 			return Integer.valueOf(response);
 		}
 		catch (IOException e) {
@@ -33,6 +33,18 @@ public class DogServiceProxy implements DogService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public int getDog(double legs) {
+		try {
+			String response = util.sendRequest("http://" + HOST + ":" + PORT + "/dog/" + legs + "", "GET", "");
+			return Integer.valueOf(response);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }

@@ -35,4 +35,16 @@ public class CatServiceProxy implements CatService {
 		return null;
 	}
 	
+	@Override
+	public int getCat(double legs) {
+		try {
+			String response = util.sendRequest("http://" + HOST + ":" + PORT + "/cat/" + legs + "", "GET", "");
+			return Integer.valueOf(response);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 }

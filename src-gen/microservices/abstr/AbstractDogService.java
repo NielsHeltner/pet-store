@@ -37,9 +37,9 @@ public abstract class AbstractDogService implements DogService, Runnable {
 				if (path.matches("\\/dog")) {
 					System.out.println("/dog was hit");
 					switch (method) {
-						case "POST": {
+						case "PUT": {
 							int dogYears = Integer.valueOf(parameters.get("dogYears"));
-							Object response = postDog(dogYears);
+							Object response = putDog(dogYears);
 							util.sendResponse(exchange, 200, response);
 							return;
 						}
@@ -52,6 +52,19 @@ public abstract class AbstractDogService implements DogService, Runnable {
 					switch (method) {
 						case "GET": {
 							Object response = getDog();
+							util.sendResponse(exchange, 200, response);
+							return;
+						}
+						default:
+							util.sendResponse(exchange, 405, method + " is not implemented on " + path);
+					}
+				}
+				if (path.matches("\\/dog\\/[0-9]+(\\.[0-9]+)")) {
+					System.out.println("/dog/{double} was hit");
+					switch (method) {
+						case "GET": {
+							double legs = Double.valueOf(path.split("/")[2]);
+							Object response = getDog(legs);
 							util.sendResponse(exchange, 200, response);
 							return;
 						}

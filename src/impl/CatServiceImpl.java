@@ -19,6 +19,12 @@ public class CatServiceImpl extends AbstractCatService {
 		return null;
 	}
 	
+	@Override
+	public int getCat(double legs) {
+		//TODO: implement endpoint logic here
+		return 0;
+	}
+	
 	public static void main(String[] args) {
 		new CatServiceImpl().run();
 	}

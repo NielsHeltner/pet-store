@@ -12,4 +12,6 @@ public interface CatService {
 	
 	String getCat();
 	
+	int getCat(double legs);
+	
 }
